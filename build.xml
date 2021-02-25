@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Lab6" default="jar">
+	<description>
+		This is a script to build the project
+	</description>
+
+	<target name="jar" depends="compile, init">
+		<jar destfile="Graph.jar" basedir="bin">
+			<manifest>
+				<attribute name="Main-Class" value="lab5.MainWindow" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac srcdir="src" destdir="bin" debug="true"
+			includeantruntime="false" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="bin" />
+	</target>
+</project>
