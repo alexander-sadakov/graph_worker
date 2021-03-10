@@ -1,4 +1,4 @@
-package graphs;
+package graph_classes;
 
 public class Pair<F, L> {
 

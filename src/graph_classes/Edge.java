@@ -1,4 +1,4 @@
-package graphs;
+package graph_classes;
 
 public class Edge implements Comparable<Edge> {
 	private int weight;

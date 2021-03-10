@@ -1,4 +1,4 @@
-package graphs;
+package graph_classes;
 
 import java.util.Collections;
 import java.util.Vector;
@@ -25,7 +25,7 @@ public class Prim {
 		Vertex vertex = q.get(index);
 		v.add(vertex);
 
-		Logger.getInstance().print("Ñhoose a random vertex: " + vertex.toString());
+		Logger.getInstance().print("ï¿½hoose a random vertex: " + vertex.toString());
 		Logger.getInstance().print("A random index: " + index);
 		Logger.getInstance().print("Add vertex in vertex array:\n" 
 				+ v.toString() + "\n");

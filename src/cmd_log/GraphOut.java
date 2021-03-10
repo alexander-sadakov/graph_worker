@@ -1,22 +1,22 @@
-package lab_4;
+package cmd_log;
 
 import java.util.Collections;
 import java.util.Vector;
 
-import graphs.Edge;
-import graphs.Graph;
-import graphs.Vertex;
+import graph_classes.Edge;
+import graph_classes.Graph;
+import graph_classes.Vertex;
 
 public class GraphOut {
 	
 	public String out(Graph g) {
 		
 		if (g == null) {
-			return "Граф не задан";
+			return "пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ";
 		}
 		
 		if (g.vertexes().size() == 0) {
-			return "Граф пуст";
+			return "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ";
 		}
 		
 		Vector<Vertex> vertexList = g.vertexes();

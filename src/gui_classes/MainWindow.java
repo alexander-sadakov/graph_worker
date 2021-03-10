@@ -1,4 +1,4 @@
-package lab5;
+package gui_classes;
 
 import java.awt.EventQueue;
 
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 import java.util.Collections;
 
-import graphs.*;
+import graph_classes.*;
 
 public class MainWindow {
 
@@ -83,28 +83,28 @@ public class MainWindow {
 		JPanel gridEdge = new JPanel(new GridLayout(3, 3, 5, 5));
 		gridEdge.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 3));
 
-		gridEdge.add(new JLabel("Первая вершина"));
+		gridEdge.add(new JLabel("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"));
 		firstVertexField = new JTextField();
 		gridEdge.add(firstVertexField);
 
 		gridEdge.add(Box.createHorizontalStrut(20));
 
-		gridEdge.add(new JLabel("Вторая вершина"));
+		gridEdge.add(new JLabel("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"));
 		secondVertexField = new JTextField();
 		gridEdge.add(secondVertexField);
 
-		remEdgeButton = new JButton("Удалить ребро");
+		remEdgeButton = new JButton("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 		remEdgeButton.addActionListener(new OnRemEdgeButton());
-		remEdgeButton.setToolTipText("Удалить ребро");
+		remEdgeButton.setToolTipText("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 		gridEdge.add(remEdgeButton);
 
-		gridEdge.add(new JLabel("Вес ребра"));
+		gridEdge.add(new JLabel("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ"));
 		weightField = new JTextField();
 		gridEdge.add(weightField);
 
-		addEdgeButton = new JButton("Добавить ребро");
+		addEdgeButton = new JButton("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 		addEdgeButton.addActionListener(new OnAddEdgeButton());
-		addEdgeButton.setToolTipText("Добавить ребро");
+		addEdgeButton.setToolTipText("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 		gridEdge.add(addEdgeButton);
 
 		return gridEdge;
@@ -120,18 +120,18 @@ public class MainWindow {
 		gridVertex.add(Box.createHorizontalStrut(20));
 		gridVertex.add(Box.createHorizontalStrut(20));
 
-		remVertexButton = new JButton("Удалить вершину");
+		remVertexButton = new JButton("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		remVertexButton.addActionListener(new OnRemVertexButton());
-		remVertexButton.setToolTipText("Удалить вершину");
+		remVertexButton.setToolTipText("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		gridVertex.add(remVertexButton);
 
-		gridVertex.add(new JLabel("Номер вершины"));
+		gridVertex.add(new JLabel("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"));
 		numberVertexField = new JTextField();
 		gridVertex.add(numberVertexField);
 
-		addVertexButton = new JButton("Добавить вершину");
+		addVertexButton = new JButton("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		addVertexButton.addActionListener(new OnAddVertexButton());
-		addVertexButton.setToolTipText("Добавить вершину");
+		addVertexButton.setToolTipText("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		gridVertex.add(addVertexButton);
 
 		return gridVertex;
@@ -146,14 +146,14 @@ public class MainWindow {
 		gridControl.add(Box.createHorizontalStrut(20));
 		gridControl.add(Box.createHorizontalStrut(20));
 
-		kruskalButton = new JButton("Крускал");
+		kruskalButton = new JButton("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		kruskalButton.addActionListener(new OnKruskalButton());
-		kruskalButton.setToolTipText("Крускал");
+		kruskalButton.setToolTipText("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		gridControl.add(kruskalButton);
 
-		primButton = new JButton("Прим");
+		primButton = new JButton("пїЅпїЅпїЅпїЅ");
 		primButton.addActionListener(new OnPrimButton());
-		primButton.setToolTipText("Прим");
+		primButton.setToolTipText("пїЅпїЅпїЅпїЅ");
 		gridControl.add(primButton);
 
 		return gridControl;
@@ -164,21 +164,21 @@ public class MainWindow {
 		textPanel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 
 		JPanel originalGraphLayout = new JPanel(new BorderLayout());
-		originalGraphLayout.add(new JLabel("Исходный граф"), BorderLayout.NORTH);
+		originalGraphLayout.add(new JLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"), BorderLayout.NORTH);
 		originalGraphText = new JTextArea();
 		originalGraphText.setEditable(false);
 		originalGraphLayout.add(originalGraphText, BorderLayout.CENTER);
 		textPanel.add(originalGraphLayout);
 
 		JPanel kruskalGraphLayout = new JPanel(new BorderLayout());
-		kruskalGraphLayout.add(new JLabel("Алгоритм Крускала"), BorderLayout.NORTH);
+		kruskalGraphLayout.add(new JLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"), BorderLayout.NORTH);
 		kruskalGraphText = new JTextArea();
 		kruskalGraphText.setEditable(false);
 		kruskalGraphLayout.add(kruskalGraphText, BorderLayout.CENTER);
 		textPanel.add(kruskalGraphLayout);
 
 		JPanel primGraphLayout = new JPanel(new BorderLayout());
-		primGraphLayout.add(new JLabel("Алгоритм Прима"), BorderLayout.NORTH);
+		primGraphLayout.add(new JLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ"), BorderLayout.NORTH);
 		primGraphText = new JTextArea();
 		primGraphText.setEditable(false);
 		primGraphLayout.add(primGraphText, BorderLayout.CENTER);
@@ -189,11 +189,11 @@ public class MainWindow {
 
 	private String outGraph(Graph g) {
 		if (g == null) {
-			return "Граф не задан";
+			return "пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ";
 		}
 		
 		if (g.vertexes().size() == 0) {
-			return "Граф пуст";
+			return "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ";
 		}
 				
 		Vector<Vertex> vertexList = g.vertexes();
@@ -224,7 +224,7 @@ public class MainWindow {
 			if (firstVertexField.getText().length() == 0 || 
 					secondVertexField.getText().length() == 0 || 
 					weightField.getText().length() == 0) {
-				JOptionPane.showMessageDialog(remEdgeButton, "Неопределено ребро для удаления");
+				JOptionPane.showMessageDialog(remEdgeButton, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				return;
 			}
 			try {
@@ -235,7 +235,7 @@ public class MainWindow {
 				originalGraphText.setText(outGraph(graph));
 				
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(remEdgeButton, "Неверный формат числа");
+				JOptionPane.showMessageDialog(remEdgeButton, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 				return;
 			}
 		}
@@ -246,7 +246,7 @@ public class MainWindow {
 			if (firstVertexField.getText().length() == 0 || 
 					secondVertexField.getText().length() == 0 ||
 					weightField.getText().length() == 0) {
-				JOptionPane.showMessageDialog(addEdgeButton, "Неопределено ребро для добавления");
+				JOptionPane.showMessageDialog(addEdgeButton, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				return;
 			}
 			try {
@@ -257,7 +257,7 @@ public class MainWindow {
 				originalGraphText.setText(outGraph(graph));
 				
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(addEdgeButton, "Неверный формат числа");
+				JOptionPane.showMessageDialog(addEdgeButton, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 				return;
 			}
 		}
@@ -266,7 +266,7 @@ public class MainWindow {
 	class OnRemVertexButton implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			if (numberVertexField.getText().length() == 0) {
-				JOptionPane.showMessageDialog(remVertexButton, "Неопределена вершина для удаления");
+				JOptionPane.showMessageDialog(remVertexButton, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				return;
 			}
 			try {
@@ -274,7 +274,7 @@ public class MainWindow {
 				graph.remVertex(new Vertex(number));
 				originalGraphText.setText(outGraph(graph));
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(remVertexButton, "Неверный формат числа");
+				JOptionPane.showMessageDialog(remVertexButton, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 				return;
 			}
 		}
@@ -283,7 +283,7 @@ public class MainWindow {
 	class OnAddVertexButton implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
 			if (numberVertexField.getText().length() == 0) {
-				JOptionPane.showMessageDialog(addVertexButton, "Неопределена вершина для добавления");
+				JOptionPane.showMessageDialog(addVertexButton, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				return;
 			}
 			try {
@@ -291,7 +291,7 @@ public class MainWindow {
 				graph.addVertex(new Vertex(number));
 				originalGraphText.setText(outGraph(graph));
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(addVertexButton, "Неверный формат числа");
+				JOptionPane.showMessageDialog(addVertexButton, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
 				return;
 			}
 		}
@@ -306,7 +306,7 @@ public class MainWindow {
 					kruskalGraphText.setText(outGraph(g));
 				}
 				else {
-					kruskalGraphText.setText("Граф не связный");
+					kruskalGraphText.setText("пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				}
 			}
 		}
@@ -321,7 +321,7 @@ public class MainWindow {
 					primGraphText.setText(outGraph(g));
 				}
 				else {
-					primGraphText.setText("Граф не связный");
+					primGraphText.setText("пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 				}
 			}
 		}

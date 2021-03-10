@@ -1,6 +1,6 @@
-package lab_4;
+package cmd_log;
 
-import graphs.*;
+import graph_classes.*;
 
 public class Main {
 
@@ -17,7 +17,7 @@ public class Main {
 
 		graph.addEdge(new Vertex(3), new Vertex(4), 6);
 
-		System.out.println("Исходный граф:");
+		System.out.println("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ:");
 		System.out.print(graphOut.out(graph));
 		System.out.println();
 		
@@ -25,19 +25,19 @@ public class Main {
 			Prim prim = new Prim();
 			Graph primGraph = prim.getGraph(graph);
 
-			System.out.println("Прим:");
+			System.out.println("пїЅпїЅпїЅпїЅ:");
 			System.out.print(graphOut.out(primGraph));
 			System.out.println();
 			
 			Kruskal kruskal = new Kruskal();
 			Graph kruskalGraph = kruskal.getGraph(graph);
 			
-			System.out.println("Краскал:");
+			System.out.println("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ:");
 			System.out.println(graphOut.out(kruskalGraph));
 			System.out.println();	
 		}
 		else {
-			System.out.println("Граф не связный");
+			System.out.println("пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		}
 	}
 	

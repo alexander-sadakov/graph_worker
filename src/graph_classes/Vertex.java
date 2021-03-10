@@ -1,4 +1,4 @@
-package graphs;
+package graph_classes;
 
 public class Vertex implements Comparable<Vertex> {
 	private int number = 0;
