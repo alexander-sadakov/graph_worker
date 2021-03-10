@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Prim {
 
-	public Graph getGraph(Graph graph) {
+	public Graph search(Graph graph) {
 		Vector<Vertex> q = graph.vertexes();
 		Vector<Vertex> v = new Vector<>();
 		Vector<Edge> h = new Vector<>();

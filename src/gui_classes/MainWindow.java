@@ -1,19 +1,15 @@
 package gui_classes;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.util.Vector;
-import java.util.Collections;
+import java.util.concurrent.*;
 
 import graph_classes.*;
 
 public class MainWindow {
-    private JFrame frame;
 
     private JTextField numberVertexField;
     private JTextField firstVertexField;
@@ -24,18 +20,18 @@ public class MainWindow {
     private JButton removeEdgeButton;
     private JButton removeVertexButton;
     private JButton addVertexButton;
-    private JButton kruskalButton;
-    private JButton primButton;
 
     private JTextArea originalGraphText;
     private JTextArea kruskalGraphText;
     private JTextArea primGraphText;
 
-    private Graph graph;
+    private final ExecutorService graphService;
+
+    private final Graph graph;
 
     public MainWindow() {
 
-        frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setBounds(100, 100, 700, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -51,9 +47,15 @@ public class MainWindow {
         border.add(controlPanels(), BorderLayout.SOUTH);
 
         frame.getContentPane().add(border, BorderLayout.SOUTH);
+
+        graphService = Executors.newFixedThreadPool(2);
+        graph = new Graph();
+
+        frame.setVisible(true);
     }
 
     private JPanel textPanels() {
+
         JPanel textPanel = new JPanel(new GridLayout(1, 3, 5, 0));
         textPanel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 
@@ -82,6 +84,7 @@ public class MainWindow {
     }
 
     private JPanel edgePanels() {
+
         JPanel gridEdge = new JPanel(new GridLayout(3, 3, 5, 5));
         gridEdge.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 3));
 
@@ -113,6 +116,7 @@ public class MainWindow {
     }
 
     private JPanel vertexPanels() {
+
         JPanel gridVertex = new JPanel(new GridLayout(3, 3, 5, 5));
         gridVertex.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
 
@@ -140,6 +144,7 @@ public class MainWindow {
     }
 
     private JPanel controlPanels() {
+
         JPanel gridControl = new JPanel(new GridLayout(2, 1, 5, 0));
         gridControl.setBorder(BorderFactory.createEmptyBorder(3, 3, 6, 3));
 
@@ -148,12 +153,12 @@ public class MainWindow {
         gridControl.add(Box.createHorizontalStrut(20));
         gridControl.add(Box.createHorizontalStrut(20));
 
-        kruskalButton = new JButton("Start Kruskal");
+        JButton kruskalButton = new JButton("Start Kruskal");
         kruskalButton.addActionListener(new MainWindow.OnKruskalButton());
         kruskalButton.setToolTipText("Start Kruskal");
         gridControl.add(kruskalButton);
 
-        primButton = new JButton("Start Prim");
+        JButton primButton = new JButton("Start Prim");
         primButton.addActionListener(new MainWindow.OnPrimButton());
         primButton.setToolTipText("Start Prim");
         gridControl.add(primButton);
@@ -174,13 +179,21 @@ public class MainWindow {
                 int first = Integer.parseInt(firstVertexField.getText().trim());
                 int second = Integer.parseInt(secondVertexField.getText().trim());
                 int weight = Integer.parseInt(weightField.getText().trim());
-                graph.removeEdge(new Vertex(first), new Vertex(second), weight);
+
+                Edge edge = new Edge(weight, new Vertex(first), new Vertex(second));
+                if (graph.containsEdge(edge)) {
+                    graph.removeEdge(edge);
+                }
+                else {
+                    JOptionPane.showMessageDialog(removeVertexButton,
+                            "Edge not found");
+                }
+
                 originalGraphText.setText(outGraph(graph));
 
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(removeEdgeButton,
                         "Fields incorrect");
-                return;
             }
         }
     }
@@ -198,13 +211,14 @@ public class MainWindow {
                 int first = Integer.parseInt(firstVertexField.getText().trim());
                 int second = Integer.parseInt(secondVertexField.getText().trim());
                 int weight = Integer.parseInt(weightField.getText().trim());
+
                 graph.addEdge(new Vertex(first), new Vertex(second), weight);
+
                 originalGraphText.setText(outGraph(graph));
 
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(addEdgeButton,
                         "Fields incorrect");
-                return;
             }
         }
     }
@@ -218,12 +232,20 @@ public class MainWindow {
             }
             try {
                 int number = Integer.parseInt(numberVertexField.getText().trim());
-                graph.removeVertex(new Vertex(number));
+
+                Vertex vertex = new Vertex(number);
+                if (graph.containsVertex(vertex)) {
+                    graph.removeVertex(vertex);
+                }
+                else {
+                    JOptionPane.showMessageDialog(removeVertexButton,
+                            "Vertex not found");
+                }
+
                 originalGraphText.setText(outGraph(graph));
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(removeVertexButton,
                         "Field incorrect");
-                return;
             }
         }
     }
@@ -237,12 +259,13 @@ public class MainWindow {
             }
             try {
                 int number = Integer.parseInt(numberVertexField.getText().trim());
+
                 graph.addVertex(new Vertex(number));
+
                 originalGraphText.setText(outGraph(graph));
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(addVertexButton,
                         "Field incorrect");
-                return;
             }
         }
     }
@@ -251,9 +274,23 @@ public class MainWindow {
         public void actionPerformed(ActionEvent event) {
             if (graph.edges().size() != 0) {
                 if (graph.isConnected()) {
-                    Kruskal kruskal = new Kruskal();
-                    Graph g = kruskal.getGraph(graph);
-                    kruskalGraphText.setText(outGraph(g));
+
+                    Callable<Graph> taskKruskal = () -> {
+                        Kruskal kruskal = new Kruskal();
+                        return  kruskal.search(graph);
+                    };
+
+                    graphService.submit(taskKruskal);
+                    Future<Graph> kruskalResult = graphService.submit(taskKruskal);
+                    Graph kruskalGraph = null;
+                    try {
+                        kruskalGraph = kruskalResult.get();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    kruskalGraphText.setText(outGraph(kruskalGraph));
                 }
                 else {
                     kruskalGraphText.setText("Graph is not connected");
@@ -266,9 +303,22 @@ public class MainWindow {
         public void actionPerformed(ActionEvent event) {
             if (graph.edges().size() != 0) {
                 if (graph.isConnected()) {
-                    Prim prim = new Prim();
-                    Graph g = prim.getGraph(graph);
-                    primGraphText.setText(outGraph(g));
+                    Callable<Graph> taskPrim = () -> {
+                        Prim prim = new Prim();
+                        return  prim.search(graph);
+                    };
+
+                    graphService.submit(taskPrim);
+                    Future<Graph> primResult = graphService.submit(taskPrim);
+                    Graph primGraph = null;
+                    try {
+                        primGraph = primResult.get();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    primGraphText.setText(outGraph(primGraph));
                 }
                 else {
                     primGraphText.setText("Graph is not connected");
@@ -278,12 +328,13 @@ public class MainWindow {
     }
 
     private String outGraph(Graph graph) {
+
         if (graph == null) {
             return "No graph";
         }
 
         String graphString = graph.toString();
-        if (graphString == "") {
+        if (graphString.equals("")) {
             return "Graph is empty";
         }
 

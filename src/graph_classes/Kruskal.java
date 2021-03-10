@@ -4,7 +4,9 @@ import java.util.Collections;
 import java.util.Vector;
 
 public class Kruskal {
-	
+
+	Thread thread;
+
 	private int findVertex(Vector<Vector<Vertex>> vs, Vector<Vertex> v) {
 		if (v.size() > 1) {
 			return-1;
@@ -23,18 +25,13 @@ public class Kruskal {
 		return -1;
 	}
 	
-	public Graph getGraph(Graph g) {
-		// ��������� � ����� ��������� �����
+	public Graph search(Graph g) {
 		Vector<Edge> edges = g.edges();
 
-		// ��������� ������ ��������� �����
 		Vector<Vertex> vertexes = g.vertexes();
 
-		// ��������� ���������� �������� ���. ��������� ������,
-		// ��������������� ����������� ��������� �����
 		Vector<Vector<Vertex>> vs = new Vector<>();
 
-		// ��������� ����� ��������� ������
 		Vector<Edge> h = new Vector<>();
 
 		Collections.sort(edges);
@@ -71,4 +68,5 @@ public class Kruskal {
 		graph.addEdges(h);
 		return graph;
 	}
+
 }

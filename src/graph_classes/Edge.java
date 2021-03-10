@@ -4,7 +4,7 @@ public class Edge implements Comparable<Edge> {
 	private int weight;
 	private Pair <Vertex, Vertex> vertexPair;
 
-	Edge(int w, Vertex v1, Vertex v2) {
+	public Edge(int w, Vertex v1, Vertex v2) {
 		weight = w;
 		vertexPair = new Pair<Vertex, Vertex>(v1, v2);
 	}

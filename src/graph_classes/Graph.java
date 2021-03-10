@@ -61,6 +61,22 @@ public class Graph {
 			Collections.sort(edgeList);
 		}
 	}
+
+	public void addEdge (Edge edge) {
+		Vertex vertex1 = edge.vertexes().first();
+		if (!vertexList.contains(vertex1)) {
+			addVertex(vertex1);
+		}
+		Vertex vertex2 = edge.vertexes().first();
+		if (!vertexList.contains(vertex2)) {
+			addVertex(vertex2);
+		}
+		Collections.sort(vertexList);
+		if (!edgeList.contains(edge)) {
+			edgeList.add(edge);
+			Collections.sort(edgeList);
+		}
+	}
 	
 	public void addEdges(Vector<Edge> edges) {
 		for (Edge edge: edges) {
@@ -99,7 +115,31 @@ public class Graph {
 		Collections.sort(vertexList);
 		Collections.sort(edgeList);
 	}
-	
+
+	public void removeEdge(Edge edge) {
+		Vertex vertex1 = edge.vertexes().first();
+		if (!vertexList.contains(vertex1)) {
+			return;
+		}
+		Vertex vertex2 = edge.vertexes().first();
+		if (!vertexList.contains(vertex2)) {
+			return;
+		}
+
+		Edge tmpEdge = new Edge(edge.weight(), vertex1, vertex2);
+		if (!edgeList.contains(tmpEdge)) {
+			return;
+		}
+
+		for (int i = 0; i < edgeList.size(); i++) {
+			if (edgeList.get(i).equals(tmpEdge)) {
+				edgeList.remove(i);
+			}
+		}
+		Collections.sort(vertexList);
+		Collections.sort(edgeList);
+	}
+
 	public boolean containsVertex(Vertex v) {
 		return vertexList.contains(v);
 	}
