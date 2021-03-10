@@ -16,7 +16,7 @@ public class Main {
 
 		graph.addEdge(new Vertex(3), new Vertex(4), 6);
 
-		System.out.println("�������� ����:");
+		System.out.println("Origin graph:");
 		System.out.print(graph.toString());
 		System.out.println();
 		
@@ -24,19 +24,19 @@ public class Main {
 			Prim prim = new Prim();
 			Graph primGraph = prim.getGraph(graph);
 
-			System.out.println("����:");
+			System.out.println("Prim graph:");
 			System.out.print(primGraph.toString());
 			System.out.println();
 			
 			Kruskal kruskal = new Kruskal();
 			Graph kruskalGraph = kruskal.getGraph(graph);
 			
-			System.out.println("�������:");
+			System.out.println("Kruskal graph:");
 			System.out.println(kruskalGraph.toString());
 			System.out.println();	
 		}
 		else {
-			System.out.println("���� �� �������");
+			System.out.println("Graph is not connected");
 		}
 	}
 	

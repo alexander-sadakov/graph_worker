@@ -155,7 +155,7 @@ public class Graph {
 
 	public String toString() {
 		if (vertexList.size() == 0) {
-			return "Graph is empty";
+			return "";
 		}
 
 		Vector<Vertex> vertexList = this.vertexList;
