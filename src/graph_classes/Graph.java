@@ -27,7 +27,7 @@ public class Graph {
 		}
 	}
 	
-	public void remVertex(Vertex vertex) {
+	public void removeVertex(Vertex vertex) {
 		for (int i = 0; i < edgeList.size(); i++) {
 			if (edgeList.get(i).hasVertex(vertex)) {
 				edgeList.remove(i);
@@ -78,7 +78,7 @@ public class Graph {
 		Collections.sort(edgeList);
 	}
 	
-	public void remEdge(Vertex vertex1, Vertex vertex2, int weight) {
+	public void removeEdge(Vertex vertex1, Vertex vertex2, int weight) {
 		if (!vertexList.contains(vertex1)) {
 			return;
 		}
@@ -108,8 +108,8 @@ public class Graph {
 		return edgeList.contains(e);
 	}
 	
-	public Vector<Vector<Edge>> incidenceList() {
-		Vector<Vector<Edge>> iList = new Vector<>(vertexList.size());
+	public Vector<Vector<Edge>> getIncidenceList() {
+		Vector<Vector<Edge>> incidenceList = new Vector<>(vertexList.size());
 
 		for (Vertex vertex : vertexList) {
 			Vector<Edge> vEdges = new Vector<>();
@@ -120,12 +120,11 @@ public class Graph {
 				}
 			}
 
-			iList.add(vEdges);
+			incidenceList.add(vEdges);
 		}
 
-		return iList;
-	} 
-	
+		return incidenceList;
+	}
 
 	public boolean isConnected() {
 		Vector<Vertex> V = new Vector<>();
@@ -138,11 +137,11 @@ public class Graph {
 			S.remove(0);
 			V.add(start);
 			
-			Vector<Edge> edges = incidenceList().get(vertexList.indexOf(start));
+			Vector<Edge> edges = getIncidenceList().get(vertexList.indexOf(start));
 			for (Edge e : edges) {
-				Vertex vrtx = e.adjacentVertex(start);
-				if (!V.contains(vrtx) && !S.contains(vrtx)) {
-					S.add(vrtx);
+				Vertex vertex = e.adjacentVertex(start);
+				if (!V.contains(vertex) && !S.contains(vertex)) {
+					S.add(vertex);
 				}
 			}
 		}
@@ -153,5 +152,32 @@ public class Graph {
 		
 		return true;
 	}
-	
+
+	public String toString() {
+		if (vertexList.size() == 0) {
+			return "Graph is empty";
+		}
+
+		Vector<Vertex> vertexList = this.vertexList;
+		Vector<Vector<Edge>> vertexEdges = this.getIncidenceList();
+
+		Collections.sort(vertexList);
+
+		String str = new String("");
+
+		for (int i = 0; i < vertexList.size(); i++) {
+			Vertex vertex = vertexList.get(i);
+			str += vertex.number() + ": ";
+
+			for (Edge edge: vertexEdges.get(i)) {
+				str += edge.adjacentVertex(vertex).number() + " (";
+				str += edge.weight() + ")";
+				str += " -> ";
+			}
+
+			str += "\n";
+		}
+
+		return str;
+	}
 }

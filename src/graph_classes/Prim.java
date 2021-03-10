@@ -11,7 +11,7 @@ public class Prim {
 		Vector<Vertex> v = new Vector<>();
 		Vector<Edge> h = new Vector<>();
 		Vector<Edge> t = new Vector<>();
-		Vector<Vector<Edge>> es = graph.incidenceList();
+		Vector<Vector<Edge>> es = graph.getIncidenceList();
 
 		Logger.getInstance().print("Get vertexes from the original" 
 				+ " graph:\n" + q.toString());

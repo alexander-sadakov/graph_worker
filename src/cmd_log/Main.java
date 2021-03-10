@@ -5,7 +5,6 @@ import graph_classes.*;
 public class Main {
 
 	public static void main(String[] args) {
-		GraphOut graphOut = new GraphOut();
 		
 		Graph graph = new Graph();
 		graph.addEdge(new Vertex(0), new Vertex(2), 1);
@@ -18,7 +17,7 @@ public class Main {
 		graph.addEdge(new Vertex(3), new Vertex(4), 6);
 
 		System.out.println("�������� ����:");
-		System.out.print(graphOut.out(graph));
+		System.out.print(graph.toString());
 		System.out.println();
 		
 		if (graph.isConnected()) {
@@ -26,14 +25,14 @@ public class Main {
 			Graph primGraph = prim.getGraph(graph);
 
 			System.out.println("����:");
-			System.out.print(graphOut.out(primGraph));
+			System.out.print(primGraph.toString());
 			System.out.println();
 			
 			Kruskal kruskal = new Kruskal();
 			Graph kruskalGraph = kruskal.getGraph(graph);
 			
 			System.out.println("�������:");
-			System.out.println(graphOut.out(kruskalGraph));
+			System.out.println(kruskalGraph.toString());
 			System.out.println();	
 		}
 		else {
